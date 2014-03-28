@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Test for Signature </title>
+	<script>
+	$(function(){
+
+		$("#signature").jSignature();
+
+		$('#reset').click(function(){
+			$('#signature').jSignature('reset');
+		});
+
+
+		$('#send').click(function(){
+			// Grabbing the image 
+
+			var datapair = $('#signature').jSignature("getData", "svgbase64") ;
+			var i = new Image();
+			i.src = "data:" + datapair[0] + "," + datapair[1] ;
+
+			//$('#canvas').append(i);
+
+            var address = $("#address").val();
+            var nextAddress = $("#nextAddress").val();
+
+			console.log(datapair);
+			// Send the data...
+			$.ajax({
+				url:address,
+				data:{ sign: datapair },
+				datatype:"text",
+				contentType:'application/x-www-form-urlencoded; charset=UTF-8',
+				success: function(data){
+					alert(data);
+					
+				}
+
+			});
+		});
+
+
+	});
+	</script>
+</head>
+<body>
+	<div id="signature"></div>
+	<input type="hidden" id="address" value="{{address}}" />
+	<input type="hidden" id="nextAddress" value="{{nextAddress}}" />
+	
+	<button id='reset'>Reset</button>
+	<button data-ng-click="next()"  id='send'>Send</button>
+
+	<div id='canvas'></div>
+</body>
+</html>

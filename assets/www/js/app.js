@@ -39,6 +39,10 @@ eSurveyApp.config(['$routeProvider',
   templateUrl: 'templates/send.html',
   controller: 'sendMemberController'
       }).
+       when('/sign/:username/:uid/:id', {
+  templateUrl: 'templates/signature.html',
+  controller: 'signatureController'
+      }).
       otherwise({
 	redirectTo: '/login'
       });

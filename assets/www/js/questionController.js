@@ -16,7 +16,7 @@ eSurveyApp.controller('questionController',function($scope,$routeParams,$rootSco
 					answer:answer
 				}).success(function(data){	
 					$scope.answer=[];
-					alert("Survey Successfully Saved");
+					$location.path('/sign/' + $scope.username + '/'+$scope.uid + '/'+$scope.id);
 				});
 		}
 });
